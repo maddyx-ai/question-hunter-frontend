@@ -1,17 +1,77 @@
 ---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import { fetchPosts } from "../lib/markdown";
 
+let posts: Awaited<ReturnType<typeof fetchPosts>> = [];
+let fetchError = false;
+
+try {
+  posts = await fetchPosts();
+} catch {
+  fetchError = true;
+}
 ---
 
-<html lang="en">
-	<head>
-		<meta charset="utf-8" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<link rel="icon" href="/favicon.ico" />
-		<meta name="viewport" content="width=device-width" />
-		<meta name="generator" content={Astro.generator} />
-		<title>Astro</title>
-	</head>
-	<body>
-		<h1>Astro</h1>
-	</body>
-</html>
+<BaseLayout title="Question Hunter | Latest" description="Automated technical fixes">
+  <section class="mb-16">
+    <h1 class="text-on-dark text-display-xl tracking-display-xl mb-4">
+      Latest Fixes
+    </h1>
+    <p class="text-ink-mute text-body-lg max-w-2xl">
+      Automated deep dives and technical fixes, fresh from the pipeline.
+    </p>
+  </section>
+
+  {fetchError ? (
+    <section class="flex items-center justify-center py-32">
+      <div class="text-center">
+        <p class="text-ink-mute text-body-lg mb-2">Unable to reach the Hunter API.</p>
+        <p class="text-ink-mute-2 text-caption">Check that the backend is running at {import.meta.env.PUBLIC_BACKEND_URL}</p>
+      </div>
+    </section>
+  ) : posts.length === 0 ? (
+    <section class="flex items-center justify-center py-32">
+      <p class="text-ink-mute text-body-lg">The Hunter is currently gathering data...</p>
+    </section>
+  ) : (
+    <section class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-lg">
+      {posts.map((post) => {
+        const date = new Intl.DateTimeFormat("en-US", {
+          year: "numeric",
+          month: "short",
+          day: "numeric",
+        }).format(new Date(post.published_at));
+
+        return (
+          <a
+            href={`/post/${post.slug}`}
+            class="group block rounded-lg border border-white/10 bg-canvas-night-soft/50 backdrop-blur-md transition-all duration-300 hover:-translate-y-1 hover:border-primary/50 hover:shadow-float"
+          >
+            <article class="p-6 flex flex-col gap-3">
+              <time datetime={new Date(post.published_at).toISOString()} class="text-ink-mute-2 text-micro">
+                {date}
+              </time>
+              <h2 class="text-heading-md text-on-dark font-medium">
+                {post.title}
+              </h2>
+              {post.meta_description && (
+                <p class="text-ink-mute text-body-md line-clamp-2">
+                  {post.meta_description}
+                </p>
+              )}
+              {post.tags && post.tags.length > 0 && (
+                <div class="flex flex-wrap gap-2 mt-auto pt-3">
+                  {post.tags.map((tag) => (
+                    <span class="text-micro text-ink-mute-2 bg-white/5 rounded-full px-2 py-0.5">
+                      {tag}
+                    </span>
+                  ))}
+                </div>
+              )}
+            </article>
+          </a>
+        );
+      })}
+    </section>
+  )}
+</BaseLayout>

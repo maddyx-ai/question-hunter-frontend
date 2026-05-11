@@ -1,0 +1,94 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import { fetchPosts, type ApiPostSummary } from "../../lib/markdown";
+import type { GetStaticPaths } from "astro";
+
+export const getStaticPaths: GetStaticPaths = async () => {
+  const tagToSlug = (tag: string): string =>
+    tag
+      .toLowerCase()
+      .trim()
+      .replace(/[@/]/g, "-")
+      .replace(/[^a-z0-9-]/g, "")
+      .replace(/-+/g, "-")
+      .replace(/^-|-$/g, "");
+
+  try {
+    const posts = await fetchPosts();
+    const tagMap = new Map<string, { display: string; posts: ApiPostSummary[] }>();
+
+    for (const post of posts) {
+      for (const tag of post.tags ?? []) {
+        const slug = tagToSlug(tag);
+        if (!slug) continue;
+        const existing = tagMap.get(slug);
+        if (existing) {
+          existing.posts.push(post);
+        } else {
+          tagMap.set(slug, { display: tag.trim(), posts: [post] });
+        }
+      }
+    }
+
+    return Array.from(tagMap.entries()).map(([slug, data]) => ({
+      params: { tag: slug },
+      props: { displayTag: data.display, taggedPosts: data.posts },
+    }));
+  } catch {
+    return [];
+  }
+};
+
+const { tag } = Astro.params;
+const { displayTag, taggedPosts } = Astro.props as {
+  displayTag: string;
+  taggedPosts: ApiPostSummary[];
+};
+
+const displayName = displayTag;
+---
+
+<BaseLayout title={displayName} description={`Articles tagged with ${displayName}`}>
+  <section class="mb-16">
+    <a href="/" class="text-ink-mute-2 text-caption hover:text-on-dark transition-colors mb-4 inline-block">
+      &larr; All posts
+    </a>
+    <h1 class="text-on-dark text-display-xl tracking-display-xl mb-4">
+      Articles tagged with: <span class="text-primary">{displayName}</span>
+    </h1>
+    <p class="text-ink-mute text-body-lg">{taggedPosts.length} post{taggedPosts.length !== 1 ? "s" : ""}</p>
+  </section>
+
+  <section class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-lg">
+    {taggedPosts
+      .sort((a, b) => new Date(b.published_at).valueOf() - new Date(a.published_at).valueOf())
+      .map((post) => {
+        const date = new Intl.DateTimeFormat("en-US", {
+          year: "numeric",
+          month: "short",
+          day: "numeric",
+        }).format(new Date(post.published_at));
+
+        return (
+          <a
+            href={`/post/${post.slug}`}
+            class="group block rounded-lg border border-white/10 bg-canvas-night-soft/50 backdrop-blur-md transition-all duration-300 hover:-translate-y-1 hover:border-primary/50 hover:shadow-float"
+          >
+            <article class="p-6 flex flex-col gap-3">
+              <time datetime={new Date(post.published_at).toISOString()} class="text-ink-mute-2 text-micro">
+                {date}
+              </time>
+              <h2 class="text-heading-md text-on-dark font-medium">
+                {post.title}
+              </h2>
+              {post.meta_description && (
+                <p class="text-ink-mute text-body-md line-clamp-2">
+                  {post.meta_description}
+                </p>
+              )}
+            </article>
+          </a>
+        );
+      })}
+  </section>
+</BaseLayout>

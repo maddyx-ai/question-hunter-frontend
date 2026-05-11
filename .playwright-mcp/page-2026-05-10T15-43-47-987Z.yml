@@ -1,0 +1,208 @@
+- generic [active] [ref=e1]:
+  - banner [ref=e2]:
+    - navigation [ref=e3]:
+      - link "Question Hunter" [ref=e4] [cursor=pointer]:
+        - /url: /
+      - generic [ref=e5]:
+        - link "Blog" [ref=e6] [cursor=pointer]:
+          - /url: /blog
+        - link "About" [ref=e7] [cursor=pointer]:
+          - /url: /about
+  - main [ref=e8]:
+    - generic [ref=e9]:
+      - 'heading "Turn Your 2D Particle Ring into a True 3D System: Step-by-Step Guide for Real-Time WebGL" [level=1] [ref=e10]'
+      - generic [ref=e11]:
+        - time [ref=e12]: May 9, 2026
+        - generic [ref=e13]: ·
+        - generic [ref=e14]:
+          - generic [ref=e15]: WebGL
+          - generic [ref=e16]: particle system
+          - generic [ref=e17]: 3D rendering
+          - generic [ref=e18]: Three.js
+          - generic [ref=e19]: GLSL shaders
+    - generic [ref=e20]:
+      - generic [ref=e22]:
+        - heading "Why Your 2D Saturn Ring Isn’t Truly 3D" [level=2] [ref=e23]
+        - paragraph [ref=e24]: "Your current setup uses polar coordinates—x = r * cos(θ) and y = r * sin(θ)—to place particles on a flat circle. While CSS transforms or simple matrix rotations can tilt this circle to mimic depth, it remains a 2D construct. True 3D requires distributing particles in three dimensions: along a ring’s major circumference, its minor radius, and its vertical tilt. This introduces depth that reacts to camera movement, lighting, and perspective."
+        - 'heading "A Quick Reality Check: CPU vs. GPU" [level=3] [ref=e25]'
+        - paragraph [ref=e26]: If you’re generating 1,000+ particles, relying on JavaScript to calculate x, y, z in a loop during each frame will kill performance. Instead, offload the geometry and physics to the GPU. WebGL with GLSL shaders or a library like Three.js lets you define particle positions once and update them efficiently using textures or buffer arrays.
+        - 'heading "Step 1: Model the Ring in 3D Space" [level=2] [ref=e27]'
+        - paragraph [ref=e28]:
+          - text: A true 3D ring is called a
+          - strong [ref=e29]: torus
+          - text: ". It’s defined by two radii:"
+        - list [ref=e30]:
+          - listitem [ref=e31]: "Major radius (R): distance from the center of the torus to the center of the tube"
+          - listitem [ref=e32]: "Minor radius (r): radius of the tube itself"
+        - paragraph [ref=e33]: "The parametric equations to distribute particles evenly on a torus are:"
+        - code [ref=e35]: // Angular position around the major circle (0 to 2π) let u = Math.random() * Math.PI * 2; // Angular position around the minor circle (0 to 2π) let v = Math.random() * Math.PI * 2; // 3D coordinates on the surface of the torus let x = (R + r * Math.cos(v)) * Math.cos(u); let y = (R + r * Math.cos(v)) * Math.sin(u); let z = r * Math.sin(v);
+        - paragraph [ref=e36]: This distributes particles uniformly over the surface. For a more disk-like ring (like Saturn’s rings), set z to be very small relative to x and y, or distribute z using a normal distribution centered at zero.
+        - paragraph [ref=e37]: "Example setup in Three.js:"
+        - code [ref=e39]: "import * as THREE from 'three'; // Ring parameters const R = 5; // major radius const r = 0.5; // minor radius const segmentCount = 2000; // number of particles const geometry = new THREE.BufferGeometry(); const positions = new Float32Array(segmentCount * 3); // x,y,z per particle for (let i = 0; i < segmentCount; i++) { const u = Math.random() * Math.PI * 2; const v = Math.random() * Math.PI * 2; positions[i * 3] = (R + r * Math.cos(v)) * Math.cos(u); positions[i * 3 + 1] = (R + r * Math.cos(v)) * Math.sin(u); positions[i * 3 + 2] = r * Math.sin(v); } geometry.setAttribute('position', new THREE.BufferAttribute(positions, 3)); const material = new THREE.PointsMaterial({ size: 0.1, color: 0xaaaaaa, transparent: true, opacity: 0.8 }); const torusRing = new THREE.Points(geometry, material); scene.add(torusRing);"
+        - 'heading "Step 2: Handle Camera Movement and Perspective" [level=2] [ref=e40]'
+        - paragraph [ref=e41]: "With particles now in 3D space, your camera can move freely. Use Three.js’s built-in perspective camera:"
+        - code [ref=e43]: camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000); camera.position.z = 10; camera.lookAt(0, 0, 0);
+        - paragraph [ref=e44]: "Enable orbit controls to rotate interactively:"
+        - code [ref=e46]: "import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls'; const controls = new OrbitControls(camera, renderer.domElement); controls.enableDamping = true; controls.dampingFactor = 0.05;"
+        - paragraph [ref=e47]: Now, as you orbit the camera, the ring will display true depth, with particles closer to the viewer appearing larger and those on the far side partially occluded.
+        - 'heading "Step 3: Optimize for Performance" [level=2] [ref=e48]'
+        - heading "Use Instanced Rendering" [level=3] [ref=e49]
+        - paragraph [ref=e50]:
+          - text: For 10,000+ particles, use
+          - code [ref=e51]: THREE.InstancedMesh
+          - text: instead of
+          - code [ref=e52]: THREE.Points
+          - text: . It reuses a single geometry for all instances, drastically reducing draw calls.
+        - paragraph [ref=e53]: "Example:"
+        - code [ref=e55]: "const count = 10000; const instancedMesh = new THREE.InstancedMesh(geometry, material, count); // Assign unique matrices or offsets const dummy = new THREE.Object3D(); for (let i = 0; i < count; i++) { const u = Math.random() * Math.PI * 2; const v = Math.random() * Math.PI * 2; const x = (R + r * Math.cos(v)) * Math.cos(u); const y = (R + r * Math.cos(v)) * Math.sin(u); const z = r * Math.sin(v); dummy.position.set(x, y, z); dummy.updateMatrix(); instancedMesh.setMatrixAt(i, dummy.matrix); } scene.add(instancedMesh);"
+        - heading "Offload Physics to Shaders" [level=3] [ref=e56]
+        - paragraph [ref=e57]:
+          - text: To animate particles (e.g., orbital motion or wobble), use
+          - strong [ref=e58]: GLSL in Three.js
+          - text: . Define a custom shader material with a time uniform to update positions per frame on the GPU.
+        - paragraph [ref=e59]: "Example fragment in a custom shader:"
+        - code [ref=e61]: "uniform float time; attribute float offset; varying vec3 vPosition; void main() { // Apply orbital motion based on time float theta = time * 0.5 + offset; float x = (R + r * cos(offset)) * cos(theta); float y = (R + r * cos(offset)) * sin(theta); float z = r * sin(offset); vec3 pos = vec3(x, y, z); vPosition = pos; gl_Position = projectionMatrix * modelViewMatrix * vec4(pos, 1.0); gl_PointSize = 5.0; }"
+        - paragraph [ref=e62]: This avoids JavaScript loops and runs at 60fps even with 50,000 particles.
+        - heading "Use a Particle Pool or Texture Atlas" [level=3] [ref=e63]
+        - paragraph [ref=e64]: Store particle data (e.g., position, velocity, life) in a texture and sample it in the vertex shader. This is how engines like Unity handle massive particle systems.
+        - paragraph [ref=e65]:
+          - text: For Three.js, you can use a
+          - code [ref=e66]: DataTexture
+          - text: with RGBA32F format to store float data, then sample it in the vertex shader using texture coordinates derived from instance IDs.
+        - 'heading "Step 4: Simulate Orbital Motion in 3D" [level=2] [ref=e67]'
+        - paragraph [ref=e68]: To make the ring feel alive, give particles orbital motion. Use Keplerian orbits or simple circular motion with phase offsets.
+        - paragraph [ref=e69]: "Assign each particle a random orbital phase:"
+        - code [ref=e71]: "// In geometry setup: const offsets = new Float32Array(count); for (let i = 0; i < count; i++) { offsets[i] = Math.random() * Math.PI * 2; } geometry.setAttribute('offset', new THREE.BufferAttribute(offsets, 1));"
+        - paragraph [ref=e72]: "Update in shader:"
+        - code [ref=e74]: "uniform float time; attribute float offset; void main() { float orbitalSpeed = 0.5; float theta = time * orbitalSpeed + offset; float x = (R + r * cos(offset)) * cos(theta); float y = (R + r * cos(offset)) * sin(theta); float z = r * sin(offset); gl_Position = projectionMatrix * modelViewMatrix * vec4(x, y, z, 1.0); }"
+        - paragraph [ref=e75]: You can also add vertical wobble or elliptical orbits by modulating z with sin(time + offset).
+        - 'heading "Step 5: Lighting and Depth Effects" [level=2] [ref=e76]'
+        - paragraph [ref=e77]:
+          - text: For realism, add lighting. In Three.js, use a
+          - code [ref=e78]: PointLight
+          - text: at the center. Combine with
+          - code [ref=e79]: MeshStandardMaterial
+          - text: "for PBR-like particle sprites:"
+        - code [ref=e81]: "const material = new THREE.MeshStandardMaterial({ color: 0xffffff, metalness: 0.1, roughness: 0.7 }); // For points, use PointsMaterial with map for sprite const sprite = new THREE.TextureLoader().load('particle.png'); const pointsMaterial = new THREE.PointsMaterial({ size: 0.1, map: sprite, transparent: true, alphaTest: 0.5 });"
+        - paragraph [ref=e82]: "Enable depth testing and blending for correct occlusion:"
+        - code [ref=e84]: renderer.setClearColor(0x000000); renderer.setPixelRatio(window.devicePixelRatio); renderer.sortObjects = false; // Critical for particles
+        - heading "Final Tips for Real-Time Success" [level=2] [ref=e85]
+        - list [ref=e86]:
+          - listitem [ref=e87]:
+            - strong [ref=e88]: "Cap the particle count:"
+            - text: 20,000–50,000 is manageable; 100,000+ needs frustum culling or LOD.
+          - listitem [ref=e89]:
+            - strong [ref=e90]: "Use frustum culling:"
+            - text: Only render particles within the camera’s view. Use
+            - code [ref=e91]: THREE.Frustum
+            - text: to test.
+          - listitem [ref=e92]:
+            - strong [ref=e93]: "Batch static elements:"
+            - text: If some particles don’t move (e.g., background ring), render them once as a static mesh.
+          - listitem [ref=e94]:
+            - strong [ref=e95]: "Avoid per-particle JavaScript updates:"
+            - text: All math should live in shaders or be precomputed.
+        - heading "Should You Use Raw WebGL or Three.js?" [level=2] [ref=e96]
+        - paragraph [ref=e97]:
+          - text: If you’re new to WebGL, use
+          - strong [ref=e98]: Three.js
+          - text: . It handles matrix math, camera frustums, and WebGL context setup. For full control over shaders and performance, use raw WebGL with GLSL. The learning curve is steeper, but you gain fine-grained optimization.
+        - paragraph [ref=e99]: For most real-time projects, Three.js + custom shaders is the best balance.
+        - 'heading "Go Further: Add Rings, Moons, and Physics" [level=2] [ref=e100]'
+        - paragraph [ref=e101]: "Once the ring is 3D, extend it:"
+        - list [ref=e102]:
+          - listitem [ref=e103]: Add inner and outer rings with different colors and densities.
+          - listitem [ref=e104]: Include a central sphere for Saturn and moons as orbiting particles with Keplerian ellipses.
+          - listitem [ref=e105]: Simulate gravitational effects using a compute shader or Verlet integration in GLSL.
+        - paragraph [ref=e106]: "Example moon orbit:"
+        - code [ref=e108]: // Moon position at time t let a = 8; // semi-major axis let e = 0.2; // eccentricity let M = t * 0.1 + moonOffset; // mean anomaly let E = M + e * Math.sin(M); // solve Kepler’s equation let x = a * (Math.cos(E) - e); let y = a * Math.sqrt(1 - e*e) * Math.sin(E);
+        - heading "Testing Your 3D Ring" [level=2] [ref=e109]
+        - paragraph [ref=e110]: "Try this scene setup to validate depth:"
+        - list [ref=e111]:
+          - listitem [ref=e112]: Fly the camera under the ring.
+          - listitem [ref=e113]: "Look at the ring edge-on: particles should appear as a thin line."
+          - listitem [ref=e114]: "Rotate 180 degrees: verify occlusion is correct."
+          - listitem [ref=e115]: Add a ground plane with shadows to enhance 3D perception.
+        - paragraph [ref=e116]: If particles clip through the plane or disappear incorrectly, check depth testing and near/far camera planes.
+        - 'heading "Summary: Key Takeaways" [level=2] [ref=e117]'
+        - list [ref=e118]:
+          - listitem [ref=e119]: Replace 2D polar math with 3D torus equations for true geometry.
+          - listitem [ref=e120]:
+            - text: Use Three.js
+            - code [ref=e121]: InstancedMesh
+            - text: or
+            - code [ref=e122]: Points
+            - text: for performance.
+          - listitem [ref=e123]: Move orbital simulation into GLSL shaders to avoid JavaScript bottlenecks.
+          - listitem [ref=e124]: Enable camera controls and lighting for full 3D immersion.
+          - listitem [ref=e125]: Keep particle count under 50k for smooth 60fps in browsers.
+        - heading "FAQ" [level=2] [ref=e126]
+        - generic [ref=e127]:
+          - heading "Can I animate the ring's tilt dynamically?" [level=3] [ref=e128]
+          - paragraph [ref=e130]:
+            - generic [ref=e131]:
+              - text: Yes. Apply a rotation matrix to the entire ring mesh in JavaScript, or modify the z-coordinate in the vertex shader using a time-based tilt angle. For example, multiply particle z by
+              - code [ref=e132]: Math.sin(time * 0.3)
+              - text: to create a gentle nodding motion.
+          - heading "How do I prevent z-fighting between particles in a dense ring?" [level=3] [ref=e133]
+          - paragraph [ref=e135]:
+            - generic [ref=e136]:
+              - text: Increase particle size variance and jitter their positions slightly. Use non-overlapping radii by adding
+              - code [ref=e137]: r * (0.9 + 0.2 * Math.random())
+              - text: to the minor radius. For extreme density, reduce particle count per frame by using LOD (Level of Detail) based on distance.
+          - heading "Is it possible to simulate ring gaps or spokes using the same system?" [level=3] [ref=e138]
+          - paragraph [ref=e140]: Absolutely. Gaps can be created by blacklisting angular ranges (θ), or by modulating particle alpha based on a noise texture. Spokes (radial lines) can be simulated by clustering particles along specific v values (minor angle), then animating their positions with a sine wave.
+      - complementary [ref=e141]:
+        - navigation "Table of contents" [ref=e142]:
+          - paragraph [ref=e143]: On this page
+          - list [ref=e144]:
+            - listitem [ref=e145]:
+              - link "Why Your 2D Saturn Ring Isn’t Truly 3D" [ref=e146] [cursor=pointer]:
+                - /url: "#why-your-2d-saturn-ring-isnt-truly-3d"
+            - listitem [ref=e147]:
+              - 'link "A Quick Reality Check: CPU vs. GPU" [ref=e148] [cursor=pointer]':
+                - /url: "#a-quick-reality-check-cpu-vs-gpu"
+            - listitem [ref=e149]:
+              - 'link "Step 1: Model the Ring in 3D Space" [ref=e150] [cursor=pointer]':
+                - /url: "#step-1-model-the-ring-in-3d-space"
+            - listitem [ref=e151]:
+              - 'link "Step 2: Handle Camera Movement and Perspective" [ref=e152] [cursor=pointer]':
+                - /url: "#step-2-handle-camera-movement-and-perspective"
+            - listitem [ref=e153]:
+              - 'link "Step 3: Optimize for Performance" [ref=e154] [cursor=pointer]':
+                - /url: "#step-3-optimize-for-performance"
+            - listitem [ref=e155]:
+              - link "Use Instanced Rendering" [ref=e156] [cursor=pointer]:
+                - /url: "#use-instanced-rendering"
+            - listitem [ref=e157]:
+              - link "Offload Physics to Shaders" [ref=e158] [cursor=pointer]:
+                - /url: "#offload-physics-to-shaders"
+            - listitem [ref=e159]:
+              - link "Use a Particle Pool or Texture Atlas" [ref=e160] [cursor=pointer]:
+                - /url: "#use-a-particle-pool-or-texture-atlas"
+            - listitem [ref=e161]:
+              - 'link "Step 4: Simulate Orbital Motion in 3D" [ref=e162] [cursor=pointer]':
+                - /url: "#step-4-simulate-orbital-motion-in-3d"
+            - listitem [ref=e163]:
+              - 'link "Step 5: Lighting and Depth Effects" [ref=e164] [cursor=pointer]':
+                - /url: "#step-5-lighting-and-depth-effects"
+            - listitem [ref=e165]:
+              - link "Final Tips for Real-Time Success" [ref=e166] [cursor=pointer]:
+                - /url: "#final-tips-for-real-time-success"
+            - listitem [ref=e167]:
+              - link "Should You Use Raw WebGL or Three.js?" [ref=e168] [cursor=pointer]:
+                - /url: "#should-you-use-raw-webgl-or-threejs"
+            - listitem [ref=e169]:
+              - 'link "Go Further: Add Rings, Moons, and Physics" [ref=e170] [cursor=pointer]':
+                - /url: "#go-further-add-rings-moons-and-physics"
+            - listitem [ref=e171]:
+              - link "Testing Your 3D Ring" [ref=e172] [cursor=pointer]:
+                - /url: "#testing-your-3d-ring"
+            - listitem [ref=e173]:
+              - 'link "Summary: Key Takeaways" [ref=e174] [cursor=pointer]':
+                - /url: "#summary-key-takeaways"
+            - listitem [ref=e175]:
+              - link "FAQ" [ref=e176] [cursor=pointer]:
+                - /url: "#faq"
+  - contentinfo [ref=e177]:
+    - paragraph [ref=e179]: © 2026 Question Hunter. All rights reserved.

@@ -1,0 +1,82 @@
+---
+import "@fontsource/geist-sans/400.css";
+import "@fontsource/geist-sans/500.css";
+import "@fontsource/jetbrains-mono/400.css";
+import "../styles/global.css";
+
+interface Props {
+  title: string;
+  description?: string;
+  image?: string;
+}
+
+const {
+  title,
+  description = "Question Hunter — technical insights and deep dives",
+  image = "/og-default.png",
+} = Astro.props;
+
+const canonicalURL = new URL(Astro.url.pathname, Astro.site ?? Astro.url.origin);
+const siteName = "Question Hunter";
+---
+
+<!doctype html>
+<html lang="en" class="scroll-smooth">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="generator" content={Astro.generator} />
+
+    <!-- Primary meta -->
+    <title>{title} | {siteName}</title>
+    <meta name="description" content={description} />
+    <link rel="canonical" href={canonicalURL.href} />
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="icon" href="/favicon.ico" />
+
+    <!-- OpenGraph -->
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content={canonicalURL.href} />
+    <meta property="og:title" content={`${title} | ${siteName}`} />
+    <meta property="og:description" content={description} />
+    <meta property="og:image" content={new URL(image, Astro.url.origin).href} />
+    <meta property="og:site_name" content={siteName} />
+
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={`${title} | ${siteName}`} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={new URL(image, Astro.url.origin).href} />
+  </head>
+  <body
+    class="min-h-screen bg-canvas-night text-ink-mute font-sans antialiased selection:bg-primary selection:text-ink"
+  >
+    <header class="border-b border-hairline-cool-3/20">
+      <nav class="mx-auto max-w-6xl px-6 py-4 flex items-center justify-between">
+        <a href="/" class="text-on-dark font-display font-medium text-lg tracking-tight">
+          Question Hunter
+        </a>
+        <div class="flex items-center gap-6">
+          <a href="/blog" class="text-ink-mute hover:text-on-dark transition-colors text-sm">
+            Blog
+          </a>
+          <a href="/about" class="text-ink-mute hover:text-on-dark transition-colors text-sm">
+            About
+          </a>
+        </div>
+      </nav>
+    </header>
+
+    <main class="mx-auto max-w-6xl px-6 py-12">
+      <slot />
+    </main>
+
+    <footer class="border-t border-hairline-cool-3/20 mt-24">
+      <div class="mx-auto max-w-6xl px-6 py-12 text-center text-ink-mute-2 text-caption">
+        <p>&copy; {new Date().getFullYear()} {siteName}. All rights reserved.</p>
+      </div>
+    </footer>
+  </body>
+</html>

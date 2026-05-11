@@ -1,0 +1,150 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import Prose from "../../components/Prose.astro";
+import {
+  fetchPosts,
+  fetchPost,
+  processHtmlContent,
+  extractDescription,
+  type ApiPost,
+} from "../../lib/markdown";
+import type { GetStaticPaths } from "astro";
+
+export const getStaticPaths: GetStaticPaths = async () => {
+  try {
+    const posts = await fetchPosts();
+    return posts.map((post) => ({
+      params: { slug: post.slug },
+      props: { slug: post.slug },
+    }));
+  } catch {
+    return [];
+  }
+};
+
+const { slug } = Astro.props as { slug: string };
+const post = await fetchPost(slug);
+
+if (!post) {
+  return Astro.redirect("/404");
+}
+
+const { html, headings } = processHtmlContent(post.content || "");
+const tocItems = headings.filter((h) => h.depth >= 2 && h.depth <= 3);
+const description = post.meta_description || extractDescription(post.content || "");
+
+const date = new Intl.DateTimeFormat("en-US", {
+  year: "numeric",
+  month: "long",
+  day: "numeric",
+}).format(new Date(post.published_at));
+---
+
+<BaseLayout title={post.title} description={description}>
+  <!-- Hero -->
+  <header class="mb-16 max-w-3xl">
+    <h1 class="text-on-dark text-display-xl tracking-display-xl leading-none mb-6">
+      {post.title}
+    </h1>
+    <div class="flex items-center gap-4 text-ink-mute-2 text-caption">
+      <time datetime={new Date(post.published_at).toISOString()}>{date}</time>
+      {post.tags && post.tags.length > 0 && (
+        <>
+          <span aria-hidden="true">·</span>
+          <div class="flex flex-wrap gap-2">
+            {post.tags.map((tag: string) => (
+              <span class="bg-primary/10 text-primary rounded-full px-2 py-0.5 text-micro">
+                {tag}
+              </span>
+            ))}
+          </div>
+        </>
+      )}
+    </div>
+  </header>
+
+  <!-- Two-column: Prose + TOC -->
+  <div class="grid grid-cols-1 lg:grid-cols-[1fr_220px] gap-xl">
+    <Prose>
+      <div set:html={html} />
+    </Prose>
+
+    <!-- Sticky TOC (desktop only) -->
+    {tocItems.length > 0 && (
+      <aside class="hidden lg:block">
+        <nav
+          class="sticky top-24 border-l border-hairline-cool-3/30 pl-4"
+          aria-label="Table of contents"
+        >
+          <p class="text-micro text-ink-mute-2 uppercase tracking-wider mb-4 font-medium">
+            On this page
+          </p>
+          <ul class="space-y-2">
+            {tocItems.map((h) => (
+              <li>
+                <a
+                  href={`#${h.slug}`}
+                  class:list={[
+                    "block text-caption transition-colors duration-200 hover:text-on-dark",
+                    h.depth === 3 ? "pl-3" : "",
+                    "toc-link",
+                  ]}
+                  data-heading={h.slug}
+                >
+                  {h.text}
+                </a>
+              </li>
+            ))}
+          </ul>
+        </nav>
+      </aside>
+    )}
+  </div>
+</BaseLayout>
+
+<style>
+  .toc-link.active {
+    color: var(--color-on-dark);
+    font-weight: var(--font-weight-display);
+  }
+</style>
+
+<script>
+  const tocLinks = document.querySelectorAll<HTMLAnchorElement>(".toc-link");
+  if (tocLinks.length > 0) {
+    const headingIds = Array.from(tocLinks).map((link) =>
+      link.getAttribute("data-heading")
+    );
+
+    const observers = headingIds.map((id) => {
+      const el = document.getElementById(id!);
+      if (!el) return null;
+
+      const observer = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+              tocLinks.forEach((l) => {
+                l.classList.remove("active");
+                l.removeAttribute("aria-current");
+              });
+              const active = document.querySelector(
+                `.toc-link[data-heading="${id}"]`
+              );
+              active?.classList.add("active");
+              active?.setAttribute("aria-current", "true");
+            }
+          });
+        },
+        { rootMargin: "-80px 0px -60% 0px", threshold: 0 }
+      );
+
+      observer.observe(el);
+      return observer;
+    });
+
+    document.addEventListener("astro:before-swap", () => {
+      observers.filter(Boolean).forEach((o) => o!.disconnect());
+    });
+  }
+</script>

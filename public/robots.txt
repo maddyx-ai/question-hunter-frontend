@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://questionhunter.dev/sitemap-index.xml

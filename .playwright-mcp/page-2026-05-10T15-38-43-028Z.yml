@@ -1,0 +1,802 @@
+- generic [active] [ref=e1]:
+  - banner [ref=e2]:
+    - navigation [ref=e3]:
+      - link "Question Hunter" [ref=e4] [cursor=pointer]:
+        - /url: /
+      - generic [ref=e5]:
+        - link "Blog" [ref=e6] [cursor=pointer]:
+          - /url: /blog
+        - link "About" [ref=e7] [cursor=pointer]:
+          - /url: /about
+  - main [ref=e8]:
+    - generic [ref=e9]:
+      - heading "Latest Fixes" [level=1] [ref=e10]
+      - paragraph [ref=e11]: Automated deep dives and technical fixes, fresh from the pipeline.
+    - generic [ref=e12]:
+      - link [ref=e13] [cursor=pointer]:
+        - /url: /post/nodejs-worker-threads-push-vs-pull-data-processing
+        - article [ref=e14]:
+          - time [ref=e15]: May 10, 2026
+          - 'heading "Node.js Worker Threads: Push vs Pull for Data Processing in CPU-Intensive Tasks" [level=2] [ref=e16]'
+          - paragraph [ref=e17]: Compare Node.js worker threads push vs pull models for CPU-heavy tasks. Find the best pattern for performance and scalability.
+          - generic [ref=e18]:
+            - generic [ref=e19]: Node.js
+            - generic [ref=e20]: worker_threads
+            - generic [ref=e21]: performance
+            - generic [ref=e22]: data processing
+            - generic [ref=e23]: CPU-intensive
+            - generic [ref=e24]: scalability
+      - link [ref=e25] [cursor=pointer]:
+        - /url: /post/chokidar-automatic-cloudinary-upload
+        - article [ref=e26]:
+          - time [ref=e27]: May 10, 2026
+          - heading "Watch Folders with Chokidar and Auto-Upload to Cloudinary" [level=2] [ref=e28]
+          - paragraph [ref=e29]: Learn how to auto-upload videos from a folder to Cloudinary using Chokidar. Step-by-step guide.
+          - generic [ref=e30]:
+            - generic [ref=e31]: Chokidar
+            - generic [ref=e32]: Cloudinary
+            - generic [ref=e33]: file watching
+            - generic [ref=e34]: automation
+            - generic [ref=e35]: Node.js
+      - link [ref=e36] [cursor=pointer]:
+        - /url: /post/typeorm-transactional-separate-transactions-fix
+        - article [ref=e37]:
+          - time [ref=e38]: May 10, 2026
+          - 'heading "Fix TypeORM Separate Transactions with typeorm-transactional: A Deep Dive" [level=2] [ref=e39]'
+          - paragraph [ref=e40]: "Stop TypeORM from opening separate transactions in typeorm-transactional: why REQUIRED doesn't group saves as expected"
+          - generic [ref=e41]:
+            - generic [ref=e42]: TypeORM
+            - generic [ref=e43]: transactions
+            - generic [ref=e44]: typeorm-transactional
+            - generic [ref=e45]: AsyncLocalStorage
+            - generic [ref=e46]: NestJS
+            - generic [ref=e47]: PostgreSQL
+      - link [ref=e48] [cursor=pointer]:
+        - /url: /post/better-auth-server-side-cloudflare-d1-practical-guide
+        - article [ref=e49]:
+          - time [ref=e50]: May 10, 2026
+          - 'heading "Calling Better Auth Server-Side with Cloudflare D1: A Practical Guide" [level=2] [ref=e51]'
+          - paragraph [ref=e52]: Learn how to use Better Auth server-side with Cloudflare D1. Avoid TypeScript errors and expose API methods correctly.
+          - generic [ref=e53]:
+            - generic [ref=e54]: Better Auth
+            - generic [ref=e55]: Cloudflare Workers
+            - generic [ref=e56]: D1 Database
+            - generic [ref=e57]: Node.js
+            - generic [ref=e58]: Express.js
+            - generic [ref=e59]: Server-Side Auth
+      - link [ref=e60] [cursor=pointer]:
+        - /url: /post/scalable-nodejs-content-posting-system-multiplatform
+        - article [ref=e61]:
+          - time [ref=e62]: May 10, 2026
+          - heading "Building a Scalable Node.js Content Posting System for Multiple Platforms" [level=2] [ref=e63]
+          - paragraph [ref=e64]: Learn to build a scalable Node.js content posting system for multiple platforms using queues, adapters, and modular design.
+          - generic [ref=e65]:
+            - generic [ref=e66]: Node.js
+            - generic [ref=e67]: content posting
+            - generic [ref=e68]: queues
+            - generic [ref=e69]: Bull
+            - generic [ref=e70]: scalability
+            - generic [ref=e71]: REST APIs
+            - generic [ref=e72]: modular design
+            - generic [ref=e73]: multi-platform publishing
+      - link [ref=e74] [cursor=pointer]:
+        - /url: /post/electron-remove-close-button-windows-notification
+        - article [ref=e75]:
+          - time [ref=e76]: May 10, 2026
+          - heading "Remove Close Button on Windows Notifications in Electron Apps" [level=2] [ref=e77]
+          - paragraph [ref=e78]: Learn how to disable the Close button on Windows notifications using Electron's Notification API.
+          - generic [ref=e79]:
+            - generic [ref=e80]: Electron
+            - generic [ref=e81]: Windows notification
+            - generic [ref=e82]: JavaScript
+            - generic [ref=e83]: desktop app
+            - generic [ref=e84]: notification API
+      - link [ref=e85] [cursor=pointer]:
+        - /url: /post/proxy-supabase-oauth-v1-express-white-label-branding
+        - article [ref=e86]:
+          - time [ref=e87]: May 10, 2026
+          - heading "Transparent OAuth Proxying for Supabase Auth v1 Through Express" [level=2] [ref=e88]
+          - paragraph [ref=e89]: Mask Supabase URLs behind your domain for OAuth. Fix 302 redirect leaks. Use Express proxy tricks.
+          - generic [ref=e90]:
+            - generic [ref=e91]: Supabase Auth
+            - generic [ref=e92]: OAuth Proxy
+            - generic [ref=e93]: Express Middleware
+            - generic [ref=e94]: HTTP Proxy
+            - generic [ref=e95]: White Label Auth
+            - generic [ref=e96]: Supabase PKCE
+            - generic [ref=e97]: Custom Domain OAuth
+      - link [ref=e98] [cursor=pointer]:
+        - /url: /post/microservices-communication-nodejs-best-practice
+        - article [ref=e99]:
+          - time [ref=e100]: May 10, 2026
+          - 'heading "Decoupling Microservices in Node.js: Choose the Right Communication Strategy" [level=2] [ref=e101]'
+          - paragraph [ref=e102]: Comparing HTTP, gRPC, and message queues to decouple Node.js microservices. When to use API composition vs event-driven architecture.
+          - generic [ref=e103]:
+            - generic [ref=e104]: microservices
+            - generic [ref=e105]: nodejs
+            - generic [ref=e106]: express
+            - generic [ref=e107]: api composition
+            - generic [ref=e108]: event-driven architecture
+            - generic [ref=e109]: gRPC
+            - generic [ref=e110]: message queue
+            - generic [ref=e111]: axios
+      - link [ref=e112] [cursor=pointer]:
+        - /url: /post/nextjs-image-uploads-api-vs-signed-direct
+        - article [ref=e113]:
+          - time [ref=e114]: May 10, 2026
+          - 'heading "Next.js Image Uploads: API Proxy or Cloudinary Signed Direct Uploads?" [level=2] [ref=e115]'
+          - paragraph [ref=e116]: Comparing Next.js API routes vs Cloudinary signed direct uploads for ~5MB images. Memory impact, security, and validation explained.
+          - generic [ref=e117]:
+            - generic [ref=e118]: Next.js
+            - generic [ref=e119]: Cloudinary
+            - generic [ref=e120]: Supabase
+            - generic [ref=e121]: Image Upload
+            - generic [ref=e122]: API Routes
+            - generic [ref=e123]: Serverless
+      - link [ref=e124] [cursor=pointer]:
+        - /url: /post/access-nested-children-react-components-guide
+        - article [ref=e125]:
+          - time [ref=e126]: May 10, 2026
+          - 'heading "How to Access Nested Children in React Components: A Practical Guide" [level=2] [ref=e127]'
+          - paragraph [ref=e128]: Learn how to access nested children in React with working examples and avoid common pitfalls.
+          - generic [ref=e129]:
+            - generic [ref=e130]: React
+            - generic [ref=e131]: React Children API
+            - generic [ref=e132]: React Nested Components
+            - generic [ref=e133]: React Component Composition
+            - generic [ref=e134]: React Render Props
+      - link [ref=e135] [cursor=pointer]:
+        - /url: /post/angular-vs-react-job-market-2026
+        - article [ref=e136]:
+          - time [ref=e137]: May 10, 2026
+          - 'heading "Angular vs React Job Market in 2026: Should You Learn Both?" [level=2] [ref=e138]'
+          - paragraph [ref=e139]: "Angular vs React in 2025-2026: Which dominates the job market? Is Angular still relevant for juniors?"
+          - generic [ref=e140]:
+            - generic [ref=e141]: Angular
+            - generic [ref=e142]: React
+            - generic [ref=e143]: frontend development
+            - generic [ref=e144]: job market
+            - generic [ref=e145]: web development
+            - generic [ref=e146]: career advice
+            - generic [ref=e147]: 2026 trends
+            - generic [ref=e148]: TypeScript
+      - link [ref=e149] [cursor=pointer]:
+        - /url: /post/control-video-playback-in-react-with-javascript
+        - article [ref=e150]:
+          - time [ref=e151]: May 10, 2026
+          - 'heading "Control Video Playback in React with JavaScript: Pause and Play Like a Pro" [level=2] [ref=e152]'
+          - paragraph [ref=e153]: Learn to pause and play video in React using JavaScript with event handlers and refs. Simple, clean, and works in VS Code.
+          - generic [ref=e154]:
+            - generic [ref=e155]: React
+            - generic [ref=e156]: JavaScript
+            - generic [ref=e157]: video control
+            - generic [ref=e158]: play video
+            - generic [ref=e159]: pause video
+            - generic [ref=e160]: React ref
+            - generic [ref=e161]: VS Code
+      - link [ref=e162] [cursor=pointer]:
+        - /url: /post/react-activity-component-performance-visible-mode-default
+        - article [ref=e163]:
+          - time [ref=e164]: May 10, 2026
+          - heading "Does React Activity Component in Visible Mode Improve Performance Default?" [level=2] [ref=e165]
+          - paragraph [ref=e166]: Learn if React's Activity component with mode=visible by default boosts performance of hidden views.
+          - generic [ref=e167]:
+            - generic [ref=e168]: React
+            - generic [ref=e169]: Activity component
+            - generic [ref=e170]: performance
+            - generic [ref=e171]: visible mode
+            - generic [ref=e172]: React rendering
+      - link [ref=e173] [cursor=pointer]:
+        - /url: /post/learn-javascript-before-react-roadmap
+        - article [ref=e174]:
+          - time [ref=e175]: May 10, 2026
+          - 'heading "Learn JavaScript Before React: A Clear Roadmap for Beginners" [level=2] [ref=e176]'
+          - paragraph [ref=e177]: Stop the confusion. Learn JavaScript fundamentals first before React. Here's your step-by-step 2024 roadmap.
+          - generic [ref=e178]:
+            - generic [ref=e179]: JavaScript
+            - generic [ref=e180]: React
+            - generic [ref=e181]: frontend development
+            - generic [ref=e182]: learning roadmap
+            - generic [ref=e183]: beginners
+      - link [ref=e184] [cursor=pointer]:
+        - /url: /post/react-alumni-map-clustering-sidebar-leaflet-mapbox
+        - article [ref=e185]:
+          - time [ref=e186]: May 10, 2026
+          - heading "Build an Interactive Alumni Map in React with Clustering and Sidebar" [level=2] [ref=e187]
+          - paragraph [ref=e188]: Step-by-step guide to building a React alumni map with clustering, sidebar sync, and modern UI using Leaflet or Mapbox.
+          - generic [ref=e189]:
+            - generic [ref=e190]: React
+            - generic [ref=e191]: Leaflet
+            - generic [ref=e192]: Mapbox
+            - generic [ref=e193]: Geospatial
+            - generic [ref=e194]: Interactive Maps
+            - generic [ref=e195]: Clustering
+            - generic [ref=e196]: Frontend
+      - link [ref=e197] [cursor=pointer]:
+        - /url: /post/canva-button-sdk-403-forbidden-vite-react
+        - article [ref=e198]:
+          - time [ref=e199]: May 10, 2026
+          - heading "Fix Canva Button SDK 403 Forbidden on embed in Vite + React apps" [level=2] [ref=e200]
+          - paragraph [ref=e201]: Canva Button SDK 403 error in Vite/React? Solve it with exact header checks, API key region verification, and CSP fixes.
+          - generic [ref=e202]:
+            - generic [ref=e203]: Canva Button SDK
+            - generic [ref=e204]: Vite React integration
+            - generic [ref=e205]: 403 Forbidden
+            - generic [ref=e206]: API key region
+            - generic [ref=e207]: CSP directives
+            - generic [ref=e208]: network trace debugging
+            - generic [ref=e209]: Canva embed
+      - link [ref=e210] [cursor=pointer]:
+        - /url: /post/react-performance-optimization-slash-initial-load-time
+        - article [ref=e211]:
+          - time [ref=e212]: May 10, 2026
+          - 'heading "React Performance Optimization: Slash Your Initial Load Time Like a Pro" [level=2] [ref=e213]'
+          - paragraph [ref=e214]: Bust React's slow initial load—learn lazy loading, code splitting and real-world fixes for content-heavy sites.
+          - generic [ref=e215]:
+            - generic [ref=e216]: React
+            - generic [ref=e217]: performance
+            - generic [ref=e218]: code splitting
+            - generic [ref=e219]: lazy loading
+            - generic [ref=e220]: React.lazy
+            - generic [ref=e221]: Suspense
+            - generic [ref=e222]: webpack
+            - generic [ref=e223]: Next.js
+            - generic [ref=e224]: bundle analysis
+            - generic [ref=e225]: React.memo
+      - link [ref=e226] [cursor=pointer]:
+        - /url: /post/react-spa-to-nextjs-migration-seo-guide
+        - article [ref=e227]:
+          - time [ref=e228]: May 10, 2026
+          - 'heading "React SPA to Next.js: Why and How to Migrate for SEO" [level=2] [ref=e229]'
+          - paragraph [ref=e230]: Moving from React SPA to Next.js boosts SEO by rendering HTML on server. Avoid react-helmet pitfalls with static pages and server components.
+          - generic [ref=e231]:
+            - generic [ref=e232]: React
+            - generic [ref=e233]: Next.js
+            - generic [ref=e234]: SEO
+            - generic [ref=e235]: React Helmet
+            - generic [ref=e236]: Migration
+            - generic [ref=e237]: Static Site Generation
+      - link [ref=e238] [cursor=pointer]:
+        - /url: /post/react-seo-meta-tags-native-dom-updates
+        - article [ref=e239]:
+          - time [ref=e240]: May 10, 2026
+          - 'heading "React SEO Meta Tags: Master Native DOM Updates Without Libraries" [level=2] [ref=e241]'
+          - paragraph [ref=e242]: Dynamic React SEO meta tags with pure DOM API. No libraries. One-liner site-wide defaults. Ultra-lightweight.
+          - generic [ref=e243]:
+            - generic [ref=e244]: React
+            - generic [ref=e245]: SEO
+            - generic [ref=e246]: Meta Tags
+            - generic [ref=e247]: Vite
+            - generic [ref=e248]: React DOM
+            - generic [ref=e249]: No Libraries
+            - generic [ref=e250]: React-Helmet Alternative
+            - generic [ref=e251]: Performance
+      - link [ref=e252] [cursor=pointer]:
+        - /url: /post/react-booking-list-vehicle-management
+        - article [ref=e253]:
+          - time [ref=e254]: May 10, 2026
+          - heading "Build a React Booking List for Vehicle Management with Admin Actions" [level=2] [ref=e255]
+          - paragraph [ref=e256]: Learn how to build a React booking list in a vehicle management system to track customer bookings with admin approval flows.
+          - generic [ref=e257]:
+            - generic [ref=e258]: React
+            - generic [ref=e259]: vehicle management
+            - generic [ref=e260]: booking list
+            - generic [ref=e261]: admin panel
+            - generic [ref=e262]: react hooks
+      - link [ref=e263] [cursor=pointer]:
+        - /url: /post/dynamic-meta-tags-react-spa-seo-2026
+        - article [ref=e264]:
+          - time [ref=e265]: May 10, 2026
+          - 'heading "Dynamic Meta Tags in React SPAs: SEO Without SSR in 2026" [level=2] [ref=e266]'
+          - paragraph [ref=e267]: Learn how to set dynamic meta tags in React SPAs for SEO in 2026 without SSR. Best tools, tips, and workarounds inside.
+          - generic [ref=e268]:
+            - generic [ref=e269]: React
+            - generic [ref=e270]: SEO
+            - generic [ref=e271]: meta tags
+            - generic [ref=e272]: SPA
+            - generic [ref=e273]: JavaScript
+            - generic [ref=e274]: React Helmet
+            - generic [ref=e275]: Dynamic rendering
+      - link [ref=e276] [cursor=pointer]:
+        - /url: /post/react-starttransition-re-renders-without-state-changes
+        - article [ref=e277]:
+          - time [ref=e278]: May 10, 2026
+          - heading "Why React's startTransition Triggers Re-renders Even Without State Changes" [level=2] [ref=e279]
+          - paragraph [ref=e280]: React startTransition causes high-priority updates and re-renders even without state changes. Here’s why and how it affects your app.
+          - generic [ref=e281]:
+            - generic [ref=e282]: React
+            - generic [ref=e283]: startTransition
+            - generic [ref=e284]: React updates
+            - generic [ref=e285]: React performance
+            - generic [ref=e286]: React low-priority updates
+      - link [ref=e287] [cursor=pointer]:
+        - /url: /post/framer-motion-staggerchildren-dynamic-list-animation
+        - article [ref=e288]:
+          - time [ref=e289]: May 10, 2026
+          - 'heading "Framer Motion: Dynamic List Animations with StaggerChildren and Independent Inserts" [level=2] [ref=e290]'
+          - paragraph [ref=e291]: "Solve Framer Motion dynamic list animations: initial staggerChildren + independent new item entrances without breaking variant inheritance."
+          - generic [ref=e292]:
+            - generic [ref=e293]: Framer Motion
+            - generic [ref=e294]: React animations
+            - generic [ref=e295]: staggerChildren
+            - generic [ref=e296]: dynamic list
+            - generic [ref=e297]: React Spring
+            - generic [ref=e298]: animatePresence
+      - link [ref=e299] [cursor=pointer]:
+        - /url: /post/react-router-login-redirect-avoid-duplicate-redirects
+        - article [ref=e300]:
+          - time [ref=e301]: May 10, 2026
+          - heading "Preventing Unnecessary Login Redirects When User is Already Authenticated in React Router" [level=2] [ref=e302]
+          - paragraph [ref=e303]: Stop redirecting logged-in users to home when they access the login page in React Router. Learn how to preserve navigation history.
+          - generic [ref=e304]:
+            - generic [ref=e305]: React Router
+            - generic [ref=e306]: authentication
+            - generic [ref=e307]: React
+            - generic [ref=e308]: JavaScript
+            - generic [ref=e309]: routing
+      - link [ref=e310] [cursor=pointer]:
+        - /url: /post/position-popup-above-element-css-javascript
+        - article [ref=e311]:
+          - time [ref=e312]: May 10, 2026
+          - heading "Position a Popup Exactly Above Any Element with CSS and JavaScript" [level=2] [ref=e313]
+          - paragraph [ref=e314]: Learn how to pin a popup directly above any element—consistently, responsively, and without layout shifts.
+          - generic [ref=e315]:
+            - generic [ref=e316]: CSS positioning
+            - generic [ref=e317]: JavaScript
+            - generic [ref=e318]: DOM manipulation
+            - generic [ref=e319]: responsive design
+            - generic [ref=e320]: calendar UI
+      - link [ref=e321] [cursor=pointer]:
+        - /url: /post/nextjs-useeffect-fails-on-route-changes-app-router
+        - article [ref=e322]:
+          - time [ref=e323]: May 10, 2026
+          - heading "Why useEffect Fails on Next.js App Router Route Changes (And How to Fix It)" [level=2] [ref=e324]
+          - paragraph [ref=e325]: Next.js App Router breaks useEffect on dynamic routes? Learn why it happens and 3 ways to fix data fetching on route changes.
+          - generic [ref=e326]:
+            - generic [ref=e327]: Next.js
+            - generic [ref=e328]: App Router
+            - generic [ref=e329]: useEffect
+            - generic [ref=e330]: data fetching
+            - generic [ref=e331]: dynamic routes
+            - generic [ref=e332]: React hooks
+      - link [ref=e333] [cursor=pointer]:
+        - /url: /post/react-user-administration-improvements
+        - article [ref=e334]:
+          - time [ref=e335]: May 10, 2026
+          - heading "5 Practical Upgrades to Level Up Your React User Administration App" [level=2] [ref=e336]
+          - paragraph [ref=e337]: "Boost your React user admin app: add pagination, validation, search, loading states, and proper error handling today."
+          - generic [ref=e338]:
+            - generic [ref=e339]: React
+            - generic [ref=e340]: JavaScript
+            - generic [ref=e341]: Frontend Development
+            - generic [ref=e342]: User Administration
+            - generic [ref=e343]: React Hook Form
+            - generic [ref=e344]: Axios
+            - generic [ref=e345]: React Router
+      - link [ref=e346] [cursor=pointer]:
+        - /url: /post/50-day-react-nodejs-crash-course-beginners-full-stack-plan
+        - article [ref=e347]:
+          - time [ref=e348]: May 10, 2026
+          - 'heading "50-day React and Node.js Crash Course for Beginners: A Step-by-Step Full-Stack Plan" [level=2] [ref=e349]'
+          - paragraph [ref=e350]: Learn React and Node.js in 50 days with this structured, project-based plan. Build your first full-stack app fast.
+          - generic [ref=e351]:
+            - generic [ref=e352]: react
+            - generic [ref=e353]: node.js
+            - generic [ref=e354]: full-stack
+            - generic [ref=e355]: javascript
+            - generic [ref=e356]: beginner-project
+      - link [ref=e357] [cursor=pointer]:
+        - /url: /post/stop-reactgridlayout-resizing-on-window-resize
+        - article [ref=e358]:
+          - time [ref=e359]: May 10, 2026
+          - heading "Fix ReactGridLayout Elements to Prevent Auto-Resizing on Window Resize" [level=2] [ref=e360]
+          - paragraph [ref=e361]: Learn how to stop ReactGridLayout elements from resizing automatically when the window resizes. Keep your grid layout fixed for multi-monitor setups.
+          - generic [ref=e362]:
+            - generic [ref=e363]: ReactGridLayout
+            - generic [ref=e364]: fixed size
+            - generic [ref=e365]: grid layout
+            - generic [ref=e366]: react-grid-layout
+            - generic [ref=e367]: multi-monitor
+      - link [ref=e368] [cursor=pointer]:
+        - /url: /post/react-project-structure-stock-management
+        - article [ref=e369]:
+          - time [ref=e370]: May 10, 2026
+          - heading "Structuring a React Stock Management Project for Scalability and Clarity" [level=2] [ref=e371]
+          - paragraph [ref=e372]: Optimize your React stock management project with a scalable folder structure using Redux-Toolkit and best practices.
+          - generic [ref=e373]:
+            - generic [ref=e374]: React
+            - generic [ref=e375]: project structure
+            - generic [ref=e376]: Redux Toolkit
+            - generic [ref=e377]: stock management
+            - generic [ref=e378]: React best practices
+      - link [ref=e379] [cursor=pointer]:
+        - /url: /post/stop-react-useeffect-infinite-re-render
+        - article [ref=e380]:
+          - time [ref=e381]: May 10, 2026
+          - heading "Stop React useEffect Infinite Re-renders with These Fixes" [level=2] [ref=e382]
+          - paragraph [ref=e383]: "Solve React useEffect infinite re-render crashes: learn why they happen and how to fix them with 3 proven methods."
+          - generic [ref=e384]:
+            - generic [ref=e385]: React
+            - generic [ref=e386]: useEffect
+            - generic [ref=e387]: infinite re-render
+            - generic [ref=e388]: React hooks
+            - generic [ref=e389]: frontend development
+      - link [ref=e390] [cursor=pointer]:
+        - /url: /post/quill-js-capture-image-filename-react-python
+        - article [ref=e391]:
+          - time [ref=e392]: May 10, 2026
+          - heading "Capture Original Filename When Uploading Images in Quill JS (React/Python)" [level=2] [ref=e393]
+          - paragraph [ref=e394]: Keep Quill JS image filenames intact with base64 uploads. React + Python guide to pass filenames via API.
+          - generic [ref=e395]:
+            - generic [ref=e396]: Quill JS
+            - generic [ref=e397]: React
+            - generic [ref=e398]: image upload
+            - generic [ref=e399]: base64
+            - generic [ref=e400]: filename
+            - generic [ref=e401]: Python
+            - generic [ref=e402]: email composition
+      - link [ref=e403] [cursor=pointer]:
+        - /url: /post/scaling-high-traffic-applications-full-stack-guide
+        - article [ref=e404]:
+          - time [ref=e405]: May 10, 2026
+          - 'heading "Scaling High-Traffic Applications: A Full-Stack Guide to Handling 1M Requests/Minute" [level=2] [ref=e406]'
+          - paragraph [ref=e407]: Master scaling techniques for React + Spring Boot apps handling 1M requests/minute. Load balancing, CDN, caching, DB sharding, and more.
+          - generic [ref=e408]:
+            - generic [ref=e409]: scaling
+            - generic [ref=e410]: high-traffic applications
+            - generic [ref=e411]: React
+            - generic [ref=e412]: Spring Boot
+            - generic [ref=e413]: microservices
+            - generic [ref=e414]: performance optimization
+            - generic [ref=e415]: load balancing
+            - generic [ref=e416]: caching
+            - generic [ref=e417]: database sharding
+      - link [ref=e418] [cursor=pointer]:
+        - /url: /post/rslib-typescript-definitelytyped-firefox-webext-browser-missing
+        - article [ref=e419]:
+          - time [ref=e420]: May 10, 2026
+          - heading "Rslib Can’t Find Types from @types/firefox-webext-browser – Here’s the Fix" [level=2] [ref=e421]
+          - paragraph [ref=e422]: Fix 'Cannot find namespace browser' in Rslib builds with DefinitelyTyped packages like @types/firefox-webext-browser.
+          - generic [ref=e423]:
+            - generic [ref=e424]: Rslib
+            - generic [ref=e425]: TypeScript
+            - generic [ref=e426]: DefinitelyTyped
+            - generic [ref=e427]: "@types/firefox-webext-browser"
+            - generic [ref=e428]: SWC
+            - generic [ref=e429]: tsconfig
+            - generic [ref=e430]: build error
+      - link [ref=e431] [cursor=pointer]:
+        - /url: /post/signal-defaults-null-vs-undefined-best-practices
+        - article [ref=e432]:
+          - time [ref=e433]: May 10, 2026
+          - 'heading "Signal Defaults: null vs undefined in Signals — Best Practices" [level=2] [ref=e434]'
+          - paragraph [ref=e435]: Should you use null or undefined for signal defaults? Learn best practices for signals and inputs in Signals (Svelte 5).
+          - generic [ref=e436]:
+            - generic [ref=e437]: Svelte
+            - generic [ref=e438]: Signals
+            - generic [ref=e439]: Svelte 5
+            - generic [ref=e440]: JavaScript
+            - generic [ref=e441]: TypeScript
+            - generic [ref=e442]: Default values
+            - generic [ref=e443]: null vs undefined
+      - link [ref=e444] [cursor=pointer]:
+        - /url: /post/type-safety-large-typescript-javascript-projects
+        - article [ref=e445]:
+          - time [ref=e446]: May 10, 2026
+          - heading "Strengthening Type Safety in Large TypeScript/JavaScript Projects Without Breaking Everything" [level=2] [ref=e447]
+          - paragraph [ref=e448]: Boost type safety in large JS/TS projects with tools and strategies for earlier error detection and better developer experience.
+          - generic [ref=e449]:
+            - generic [ref=e450]: TypeScript
+            - generic [ref=e451]: JavaScript
+            - generic [ref=e452]: type safety
+            - generic [ref=e453]: large-scale projects
+            - generic [ref=e454]: static types
+            - generic [ref=e455]: developer experience
+      - link [ref=e456] [cursor=pointer]:
+        - /url: /post/vite-sharedworker-import-error-no-matching-export
+        - article [ref=e457]:
+          - time [ref=e458]: May 10, 2026
+          - 'heading "Vite SharedWorker Import Error: Fixing ''No matching export'' with Query Suffixes" [level=2] [ref=e459]'
+          - paragraph [ref=e460]: Fix Vite SharedWorker import errors with ?sharedworker query suffix. Step-by-step guide to resolve 'No matching export' build issues.
+          - generic [ref=e461]:
+            - generic [ref=e462]: Vite
+            - generic [ref=e463]: SharedWorker
+            - generic [ref=e464]: esbuild
+            - generic [ref=e465]: import error
+            - generic [ref=e466]: build optimization
+      - link [ref=e467] [cursor=pointer]:
+        - /url: /post/pass-props-react-function-component-typescript
+        - article [ref=e468]:
+          - time [ref=e469]: May 10, 2026
+          - heading "Pass Props Correctly to React Function Components in TypeScript" [level=2] [ref=e470]
+          - paragraph [ref=e471]: "Fix TypeScript React prop errors: learn how to pass props to function components with proper typing and avoid JSX errors."
+          - generic [ref=e472]:
+            - generic [ref=e473]: React
+            - generic [ref=e474]: TypeScript
+            - generic [ref=e475]: function components
+            - generic [ref=e476]: props
+            - generic [ref=e477]: React component type
+            - generic [ref=e478]: TypeScript interfaces
+      - link [ref=e479] [cursor=pointer]:
+        - /url: /post/add-typescript-to-existing-nodejs-project-workflow
+        - article [ref=e480]:
+          - time [ref=e481]: May 10, 2026
+          - heading "How to Add TypeScript to an Existing Node.js Project Without Losing Your Mind" [level=2] [ref=e482]
+          - paragraph [ref=e483]: Add TypeScript to a Node.js project incrementally without breaking module resolution or setup nightmares.
+          - generic [ref=e484]:
+            - generic [ref=e485]: TypeScript
+            - generic [ref=e486]: Node.js
+            - generic [ref=e487]: migration
+            - generic [ref=e488]: tsconfig
+            - generic [ref=e489]: ESM
+            - generic [ref=e490]: CommonJS
+            - generic [ref=e491]: JavaScript
+            - generic [ref=e492]: codebase
+            - generic [ref=e493]: setup
+      - link [ref=e494] [cursor=pointer]:
+        - /url: /post/typescript-generics-type-inference-break-fix
+        - article [ref=e495]:
+          - time [ref=e496]: May 10, 2026
+          - heading "Fixing TypeScript Generics Break with Defaults in Type Inference" [level=2] [ref=e497]
+          - paragraph [ref=e498]: Understand why TypeScript generics break inference with defaults and how to fix it cleanly.
+          - generic [ref=e499]:
+            - generic [ref=e500]: TypeScript
+            - generic [ref=e501]: generics
+            - generic [ref=e502]: type inference
+            - generic [ref=e503]: defaults
+            - generic [ref=e504]: ResourceOptions
+      - link [ref=e505] [cursor=pointer]:
+        - /url: /post/typescript-type-narrowing-union-not-working
+        - article [ref=e506]:
+          - time [ref=e507]: May 10, 2026
+          - 'heading "TypeScript Type Narrowing: Why Your Union Type Isn''t Narrowing As Expected" [level=2] [ref=e508]'
+          - paragraph [ref=e509]: Fix TypeScript type narrowing in your union types with these practical debugging steps.
+          - generic [ref=e510]:
+            - generic [ref=e511]: TypeScript
+            - generic [ref=e512]: type narrowing
+            - generic [ref=e513]: TypeScript unions
+            - generic [ref=e514]: TypeScript debugging
+            - generic [ref=e515]: TypeScript tips
+      - link [ref=e516] [cursor=pointer]:
+        - /url: /post/typescript-typed-function-chain-clean-pipelines
+        - article [ref=e517]:
+          - time [ref=e518]: May 10, 2026
+          - heading "Crafting a Typed Function Chain in TypeScript for Clean Functional Pipelines" [level=2] [ref=e519]
+          - paragraph [ref=e520]: Build a type-safe function chain in TypeScript that preserves types through multiple steps without losing precision.
+          - generic [ref=e521]:
+            - generic [ref=e522]: TypeScript
+            - generic [ref=e523]: functional programming
+            - generic [ref=e524]: typed functions
+            - generic [ref=e525]: function composition
+            - generic [ref=e526]: pipes
+      - link [ref=e527] [cursor=pointer]:
+        - /url: /post/typescript-overloads-keep-parameters-change-return-type
+        - article [ref=e528]:
+          - time [ref=e529]: May 10, 2026
+          - 'heading "TypeScript Overloads: Keeping Parameters While Changing Return Type" [level=2] [ref=e530]'
+          - paragraph [ref=e531]: How to preserve overloaded function parameters and change the return type in TypeScript without breaking type safety.
+          - generic [ref=e532]:
+            - generic [ref=e533]: TypeScript
+            - generic [ref=e534]: overloads
+            - generic [ref=e535]: conditional types
+            - generic [ref=e536]: utility types
+            - generic [ref=e537]: type casting
+      - link [ref=e538] [cursor=pointer]:
+        - /url: /post/nextjs-hosting-nonprofit-member-area-vercel-neon
+        - article [ref=e539]:
+          - time [ref=e540]: May 10, 2026
+          - 'heading "Best Next.js Hosting for a Non-Profit with Member Area: Vercel + Neon" [level=2] [ref=e541]'
+          - paragraph [ref=e542]: Use Vercel for Next.js hosting and Neon for Postgres. Connect them in minutes for secure member areas, no headaches.
+          - generic [ref=e543]:
+            - generic [ref=e544]: Next.js
+            - generic [ref=e545]: Vercel hosting
+            - generic [ref=e546]: Neon Postgres
+            - generic [ref=e547]: member area
+            - generic [ref=e548]: non-profit website
+            - generic [ref=e549]: Prisma ORM
+            - generic [ref=e550]: TypeScript
+      - link [ref=e551] [cursor=pointer]:
+        - /url: /post/write-only-object-typescript
+        - article [ref=e552]:
+          - time [ref=e553]: May 10, 2026
+          - heading "Build a Write-Only Object in TypeScript With Type Safety" [level=2] [ref=e554]
+          - paragraph [ref=e555]: Create a write-only object in TypeScript using unique symbol keys and runtime proxies for true runtime enforcement.
+          - generic [ref=e556]:
+            - generic [ref=e557]: TypeScript
+            - generic [ref=e558]: write-only
+            - generic [ref=e559]: runtime proxy
+            - generic [ref=e560]: type safety
+            - generic [ref=e561]: object privacy
+      - link [ref=e562] [cursor=pointer]:
+        - /url: /post/why-keyof-never-resolves-to-string-number-symbol
+        - article [ref=e563]:
+          - time [ref=e564]: May 10, 2026
+          - heading "Why keyof never resolves to string | number | symbol in TypeScript" [level=2] [ref=e565]
+          - paragraph [ref=e566]: Learn why keyof never becomes string | number | symbol in TypeScript and how it mimics keyof any.
+          - generic [ref=e567]:
+            - generic [ref=e568]: TypeScript
+            - generic [ref=e569]: keyof
+            - generic [ref=e570]: never type
+            - generic [ref=e571]: TypeScript internals
+            - generic [ref=e572]: TypeScript type system
+      - link [ref=e573] [cursor=pointer]:
+        - /url: /post/react-typescript-express-ai-project-structure
+        - article [ref=e574]:
+          - time [ref=e575]: May 10, 2026
+          - 'heading "React-TypeScript + Express Backend With AI Integration: Professional Project Structure Guide" [level=2] [ref=e576]'
+          - paragraph [ref=e577]: Build a secure, scalable AI chatbot with React/TypeScript frontend and Express backend integrated with OpenAI or Google AI.
+          - generic [ref=e578]:
+            - generic [ref=e579]: React
+            - generic [ref=e580]: TypeScript
+            - generic [ref=e581]: Express
+            - generic [ref=e582]: AI
+            - generic [ref=e583]: project structure
+      - link [ref=e584] [cursor=pointer]:
+        - /url: /post/typescript-seo-audit-tool-nodejs
+        - article [ref=e585]:
+          - time [ref=e586]: May 10, 2026
+          - heading "Build a TypeScript SEO Audit Tool for Node.js Without External APIs" [level=2] [ref=e587]
+          - paragraph [ref=e588]: Create a TypeScript SEO auditor for Node.js that scores pages by category, flags issues, and blocks CI/CD if scores drop too low.
+          - generic [ref=e589]:
+            - generic [ref=e590]: TypeScript
+            - generic [ref=e591]: SEO
+            - generic [ref=e592]: audit
+            - generic [ref=e593]: Node.js
+            - generic [ref=e594]: CI/CD
+            - generic [ref=e595]: headless CMS
+      - link [ref=e596] [cursor=pointer]:
+        - /url: /post/typescript-seo-dashboard-correlate-gsc-clicks-audit-scores-anomaly-detection
+        - article [ref=e597]:
+          - time [ref=e598]: May 10, 2026
+          - 'heading "Build a TypeScript SEO Dashboard: Detect Traffic Anomalies and Correlate GSC Clicks with Audit Scores" [level=2] [ref=e599]'
+          - paragraph [ref=e600]: Learn how to detect traffic anomalies and correlate Google Search Console clicks with audit scores in TypeScript for a scalable SEO dashboard.
+          - generic [ref=e601]:
+            - generic [ref=e602]: TypeScript
+            - generic [ref=e603]: SEO dashboard
+            - generic [ref=e604]: Google Search Console
+            - generic [ref=e605]: audit correlation
+            - generic [ref=e606]: traffic anomalies
+      - link [ref=e607] [cursor=pointer]:
+        - /url: /post/nestjs-sri-e-invoicing-multitenant-xades-bes-soap
+        - article [ref=e608]:
+          - time [ref=e609]: May 10, 2026
+          - 'heading "NestJS + Ecuador SRI e-Invoicing: Build a Multitenant XAdES-BES SOAP Integration" [level=2] [ref=e610]'
+          - paragraph [ref=e611]: Learn how to integrate NestJS with Ecuador SRI e-invoicing using XAdES-BES, SOAP, and multitenancy in under 1000 lines of code.
+          - generic [ref=e612]:
+            - generic [ref=e613]: NestJS
+            - generic [ref=e614]: SRI e-invoicing
+            - generic [ref=e615]: XAdES-BES
+            - generic [ref=e616]: SOAP
+            - generic [ref=e617]: multitenant
+      - link [ref=e618] [cursor=pointer]:
+        - /url: /post/custom-colorspec-material-color-utilities-without-editing-variants
+        - article [ref=e619]:
+          - time [ref=e620]: May 10, 2026
+          - heading "Adding a Custom ColorSpec in Material Color Utilities Without Touching variants.ts" [level=2] [ref=e621]
+          - paragraph [ref=e622]: Learn how to extend Material Color Utilities with a custom ColorSpec without editing variants.ts—save time and avoid breaking changes.
+          - generic [ref=e623]:
+            - generic [ref=e624]: Material Design
+            - generic [ref=e625]: Material Color Utilities
+            - generic [ref=e626]: ColorSpec
+            - generic [ref=e627]: CSS
+            - generic [ref=e628]: UI Development
+      - link [ref=e629] [cursor=pointer]:
+        - /url: /post/web-scraping-synchronization-letterboxd-reviews
+        - article [ref=e630]:
+          - time [ref=e631]: May 10, 2026
+          - heading "Fixing Web Scraping Synchronization for Letterboxd Reviews" [level=2] [ref=e632]
+          - paragraph [ref=e633]: Solve Letterboxd review scraping sync issues with this 3-step fix for '...more' tags and dynamic content.
+          - generic [ref=e634]:
+            - generic [ref=e635]: web scraping
+            - generic [ref=e636]: synchronization
+            - generic [ref=e637]: headless browser
+            - generic [ref=e638]: puppeteer
+            - generic [ref=e639]: playwright
+            - generic [ref=e640]: dynamic content
+      - link [ref=e641] [cursor=pointer]:
+        - /url: /post/color-blindness-screen-tools-engineers
+        - article [ref=e642]:
+          - time [ref=e643]: May 9, 2026
+          - 'heading "How Engineers Adapt Screen Workflows for Color Blindness: Tools, ICC Profiles, and Beyond" [level=2] [ref=e644]'
+          - paragraph [ref=e645]: Practical guide to adapting screens for color blindness using ICC profiles, OS tools, and developer tricks.
+          - generic [ref=e646]:
+            - generic [ref=e647]: color blindness
+            - generic [ref=e648]: accessibility tools
+            - generic [ref=e649]: ICC profiles
+            - generic [ref=e650]: developer tools
+            - generic [ref=e651]: adaptive UI
+            - generic [ref=e652]: screen calibration
+            - generic [ref=e653]: color correction
+      - link [ref=e654] [cursor=pointer]:
+        - /url: /post/emberjs-model-migration-dynamic-attributes-v4-to-v5
+        - article [ref=e655]:
+          - time [ref=e656]: May 9, 2026
+          - 'heading "Migrating Dynamic Model Attributes in Ember.js 4.12 to 5.x: A Field Guide" [level=2] [ref=e657]'
+          - paragraph [ref=e658]: Migrate dynamic Ember.js model attributes from v4.12 to 5 without breaking schema. Use SchemaDefinitionService for dynamic schemas.
+          - generic [ref=e659]:
+            - generic [ref=e660]: Ember.js
+            - generic [ref=e661]: EmberData
+            - generic [ref=e662]: Model Migration
+            - generic [ref=e663]: SchemaDefinitionService
+            - generic [ref=e664]: Ember 5
+            - generic [ref=e665]: JavaScript
+      - link [ref=e666] [cursor=pointer]:
+        - /url: /post/3d-particle-ring-webgl-guide
+        - article [ref=e667]:
+          - time [ref=e668]: May 9, 2026
+          - 'heading "Turn Your 2D Particle Ring into a True 3D System: Step-by-Step Guide for Real-Time WebGL" [level=2] [ref=e669]'
+          - paragraph [ref=e670]: Learn how to convert a 2D Saturn-like particle ring into a real 3D system in WebGL. Fast, GPU-accelerated techniques with code and math.
+          - generic [ref=e671]:
+            - generic [ref=e672]: WebGL
+            - generic [ref=e673]: particle system
+            - generic [ref=e674]: 3D rendering
+            - generic [ref=e675]: Three.js
+            - generic [ref=e676]: GLSL shaders
+      - link [ref=e677] [cursor=pointer]:
+        - /url: /post/learn-backend-development-from-frontend
+        - article [ref=e678]:
+          - time [ref=e679]: May 9, 2026
+          - 'heading "Learn Backend Development: The Clear Path from Frontend to Server-Side Mastery" [level=2] [ref=e680]'
+          - paragraph [ref=e681]: "Learn backend development step-by-step: choose Node.js or PHP Laravel to move from frontend to full-stack mastery"
+          - generic [ref=e682]:
+            - generic [ref=e683]: learn backend development
+            - generic [ref=e684]: backend development
+            - generic [ref=e685]: Node.js vs Laravel
+            - generic [ref=e686]: PHP Laravel
+            - generic [ref=e687]: from frontend to backend
+      - link [ref=e688] [cursor=pointer]:
+        - /url: /post/javascript-filter-map-reduce-how-they-work-under-the-hood
+        - article [ref=e689]:
+          - time [ref=e690]: May 9, 2026
+          - 'heading "JavaScript''s filter, map, and reduce: How They Work Under the Hood" [level=2] [ref=e691]'
+          - paragraph [ref=e692]: Learn how JavaScript’s filter, map, and reduce iterate arrays efficiently without explicit loops.
+          - generic [ref=e693]:
+            - generic [ref=e694]: JavaScript
+            - generic [ref=e695]: functional programming
+            - generic [ref=e696]: array methods
+            - generic [ref=e697]: under the hood
+            - generic [ref=e698]: filter
+            - generic [ref=e699]: map
+            - generic [ref=e700]: reduce
+      - link [ref=e701] [cursor=pointer]:
+        - /url: /post/javascript-async-script-dom-guide
+        - article [ref=e702]:
+          - time [ref=e703]: May 9, 2026
+          - heading "How to Write JavaScript for Script Tags with Async Without Breaking the DOM" [level=2] [ref=e704]
+          - paragraph [ref=e705]: "Writing JavaScript for async scripts: when DOM is safe to use and how to avoid race conditions with real examples."
+          - generic [ref=e706]:
+            - generic [ref=e707]: JavaScript
+            - generic [ref=e708]: async
+            - generic [ref=e709]: DOM
+            - generic [ref=e710]: script tag
+            - generic [ref=e711]: web performance
+      - link [ref=e712] [cursor=pointer]:
+        - /url: /post/fix-websocket-failures-production-siteground
+        - article [ref=e713]:
+          - time [ref=e714]: May 7, 2026
+          - 'heading "Fixing WebSocket Failures in Production on SiteGround: A Practical Guide" [level=2] [ref=e715]'
+          - paragraph [ref=e716]: Learn why WebSocket fails in production on SiteGround and how to fix it with practical steps.
+          - generic [ref=e717]:
+            - generic [ref=e718]: WebSocket
+            - generic [ref=e719]: SiteGround
+            - generic [ref=e720]: production
+            - generic [ref=e721]: Node.js
+            - generic [ref=e722]: HTTPS
+            - generic [ref=e723]: Socket.IO
+      - link [ref=e724] [cursor=pointer]:
+        - /url: /post/pcoa-ellipsoids-python-step-by-step
+        - article [ref=e725]:
+          - time [ref=e726]: May 7, 2026
+          - 'heading "Plotting PCoA Ellipsoids in Python: A Step-by-Step Guide with Confidence Regions" [level=2] [ref=e727]'
+          - paragraph [ref=e728]: Learn to add confidence ellipses to your PCoA plots in Python for biological sample analysis.
+          - generic [ref=e729]:
+            - generic [ref=e730]: PCoA
+            - generic [ref=e731]: ordination
+            - generic [ref=e732]: ellipses
+            - generic [ref=e733]: biological data
+            - generic [ref=e734]: Python
+            - generic [ref=e735]: skbio
+            - generic [ref=e736]: seaborn
+            - generic [ref=e737]: matplotlib
+  - contentinfo [ref=e738]:
+    - paragraph [ref=e740]: © 2026 Question Hunter. All rights reserved.

@@ -1,0 +1,227 @@
+---
+/*
+ * Prose wrapper — shared markdown rendering shell.
+ *
+ * Architecture decision: hand-rolled scoped CSS over @tailwindcss/typography.
+ * The typography plugin generates light-mode-first styles that conflict with
+ * our canvas-night dark theme. Overriding 90% of its output = dead weight.
+ * Scoped CSS gives us full DESIGN.md token control with zero unused CSS.
+ *
+ * Mobile overflow: all potentially-wide elements (pre, table, img) are
+ * constrained with overflow-x: auto + min-width: 0 to prevent layout shift.
+ */
+---
+
+<div class="prose">
+  <slot />
+</div>
+
+<style>
+  .prose :global(h2) {
+    color: var(--color-on-dark);
+    font-size: var(--text-display-md);
+    line-height: var(--text-display-md--line-height);
+    font-weight: var(--font-weight-display);
+    letter-spacing: var(--tracking-display-md);
+    margin-top: 3rem;
+    margin-bottom: 1rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+  }
+
+  .prose :global(h3) {
+    color: var(--color-on-dark);
+    font-size: var(--text-heading-lg);
+    line-height: var(--text-heading-lg--line-height);
+    font-weight: var(--font-weight-display);
+    margin-top: 2rem;
+    margin-bottom: 0.75rem;
+  }
+
+  .prose :global(h4) {
+    color: var(--color-on-dark);
+    font-size: var(--text-heading-md);
+    line-height: var(--text-heading-md--line-height);
+    font-weight: var(--font-weight-display);
+    margin-top: 1.5rem;
+    margin-bottom: 0.5rem;
+  }
+
+  .prose :global(p) {
+    color: var(--color-ink-mute);
+    font-size: var(--text-body-md);
+    line-height: var(--text-body-md--line-height);
+    margin-bottom: 1.25rem;
+  }
+
+  .prose :global(a) {
+    color: var(--color-primary);
+    text-decoration: underline;
+    text-underline-offset: 2px;
+  }
+
+  .prose :global(a:hover) {
+    color: var(--color-primary-soft);
+  }
+
+  .prose :global(ul),
+  .prose :global(ol) {
+    color: var(--color-ink-mute);
+    font-size: var(--text-body-md);
+    line-height: var(--text-body-md--line-height);
+    margin-bottom: 1.25rem;
+    padding-left: 1.5rem;
+  }
+
+  .prose :global(li) {
+    margin-bottom: 0.375rem;
+  }
+
+  .prose :global(li)::marker {
+    color: var(--color-ink-mute-2);
+  }
+
+  .prose :global(blockquote) {
+    border-left: 3px solid var(--color-primary);
+    padding-left: 1rem;
+    color: var(--color-ink-mute-2);
+    font-style: italic;
+    margin: 1.5rem 0;
+  }
+
+  .prose :global(blockquote p) {
+    margin-bottom: 0.5rem;
+  }
+
+  /* Inline code */
+  .prose :global(code) {
+    font-family: var(--font-mono);
+    font-size: var(--text-code);
+    background: rgba(255, 255, 255, 0.06);
+    padding: 0.125rem 0.375rem;
+    border-radius: var(--radius-xs);
+    color: var(--color-primary-soft);
+  }
+
+  /*
+   * Code blocks — Shiki renders inline styles for syntax highlighting.
+   * We override the container shell only. Shiki's github-dark theme tokens
+   * blend naturally with canvas-night (#1c1c1c).
+   * overflow-x: auto + -webkit-overflow-scrolling prevent horizontal layout shift.
+   */
+  .prose :global(pre) {
+    background: var(--color-canvas-night) !important;
+    border: 1px solid rgba(255, 255, 255, 0.06);
+    border-radius: var(--radius-sm);
+    padding: 1rem;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    margin: 1.5rem 0;
+    position: relative;
+  }
+
+  .prose :global(pre code) {
+    background: none !important;
+    padding: 0;
+    border-radius: 0;
+    color: var(--color-on-dark);
+    font-size: var(--text-code);
+    font-family: var(--font-mono);
+    line-height: var(--text-code--line-height);
+  }
+
+  .prose :global(hr) {
+    border: none;
+    border-top: 1px solid rgba(255, 255, 255, 0.06);
+    margin: 2rem 0;
+  }
+
+  .prose :global(img) {
+    border-radius: var(--radius-lg);
+    margin: 1.5rem 0;
+    max-width: 100%;
+    height: auto;
+  }
+
+  /*
+   * Tables — display: block + overflow-x: auto prevents horizontal layout shift
+   * on mobile when content exceeds viewport. Wrapping element handles the scroll.
+   */
+  .prose :global(table) {
+    display: block;
+    width: 100%;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    border-collapse: collapse;
+    margin: 1.5rem 0;
+    font-size: var(--text-caption);
+  }
+
+  .prose :global(th) {
+    color: var(--color-on-dark);
+    font-weight: var(--font-weight-display);
+    text-align: left;
+    padding: 0.5rem 0.75rem;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    white-space: nowrap;
+  }
+
+  .prose :global(td) {
+    color: var(--color-ink-mute);
+    padding: 0.5rem 0.75rem;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.04);
+  }
+
+  /* Strong / emphasis */
+  .prose :global(strong) {
+    color: var(--color-on-dark);
+    font-weight: var(--font-weight-display);
+  }
+
+  .prose :global(em) {
+    color: var(--color-ink-mute);
+    font-style: italic;
+  }
+
+  /* Definition lists (some markdown renderers emit these) */
+  .prose :global(dt) {
+    color: var(--color-on-dark);
+    font-weight: var(--font-weight-display);
+    margin-top: 1rem;
+  }
+
+  .prose :global(dd) {
+    color: var(--color-ink-mute);
+    margin-left: 1rem;
+    margin-bottom: 0.5rem;
+  }
+
+  /* ── Mobile refinements ───────────────────── */
+
+  @media (max-width: 768px) {
+    .prose :global(pre) {
+      font-size: 0.8125rem;
+      padding: 0.75rem;
+      border-radius: var(--radius-xs);
+    }
+
+    .prose :global(table) {
+      font-size: 0.8125rem;
+    }
+
+    .prose :global(th),
+    .prose :global(td) {
+      padding: 0.375rem 0.5rem;
+    }
+
+    .prose :global(h2) {
+      font-size: var(--text-heading-lg);
+      line-height: var(--text-heading-lg--line-height);
+    }
+
+    .prose :global(h3) {
+      font-size: var(--text-heading-md);
+      line-height: var(--text-heading-md--line-height);
+    }
+  }
+</style>
