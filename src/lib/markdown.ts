@@ -75,7 +75,11 @@ export async function fetchPosts(): Promise<ApiPostSummary[]> {
     .select("id, title, slug, tags, meta_description, published_at")
     .order("published_at", { ascending: false });
 
-  if (error) throw new Error(`Supabase: ${error.message}`);
+  if (error) {
+    console.error(`[fetchPosts] Supabase error: ${error.code} - ${error.message}`);
+    throw new Error(`Supabase: ${error.message}`);
+  }
+  console.log(`[fetchPosts] returned ${(data ?? []).length} row(s)`);
   return (data ?? []) as ApiPostSummary[];
 }
 
@@ -87,8 +91,13 @@ export async function fetchPost(slug: string): Promise<ApiPost | null> {
     .single();
 
   if (error) {
-    if (error.code === "PGRST116") return null;
+    if (error.code === "PGRST116") {
+      console.log(`[fetchPost] no row found for slug="${slug}"`);
+      return null;
+    }
+    console.error(`[fetchPost] Supabase error for slug="${slug}": ${error.code} - ${error.message}`);
     throw new Error(`Supabase: ${error.message}`);
   }
+  console.log(`[fetchPost] found row for slug="${slug}"`);
   return data as ApiPost;
 }

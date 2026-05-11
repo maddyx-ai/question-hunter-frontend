@@ -7,7 +7,8 @@ let fetchError = false;
 
 try {
   posts = await fetchPosts();
-} catch {
+} catch (err) {
+  console.error("[index] fetchPosts failed:", err instanceof Error ? err.message : err);
   fetchError = true;
 }
 ---
@@ -25,7 +26,7 @@ try {
   {fetchError ? (
     <section class="flex items-center justify-center py-32">
       <div class="text-center">
-        <p class="text-ink-mute text-body-lg mb-2">Unable to reach the Hunter API.</p>
+        <p class="text-ink-mute text-body-lg mb-2">Unable to load posts.</p>
         <p class="text-ink-mute-2 text-caption">Check that Supabase is configured and the blog_posts table exists.</p>
       </div>
     </section>

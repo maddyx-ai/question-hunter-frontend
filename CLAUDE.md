@@ -51,3 +51,16 @@ React components render as islands — they're interactive but don't hydrate unl
 ## Node Version
 
 Requires Node >= 22.12.0.
+
+## Environment Variables
+
+Required at build time (SSG mode — all code runs during `npm run build`):
+
+| Variable              | Source                                  |
+| :-------------------- | :-------------------------------------- |
+| `SUPABASE_URL`        | Supabase project URL                    |
+| `SUPABASE_ANON_KEY`   | Supabase anonymous (public) key         |
+
+**Local**: Create a `.env` file (see `.env.example`).
+
+**Vercel**: Add both variables in **Vercel Dashboard > Settings > Environment Variables**. Without these, the build will log an error and produce a site with no posts.

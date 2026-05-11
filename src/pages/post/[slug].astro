@@ -17,7 +17,8 @@ export const getStaticPaths: GetStaticPaths = async () => {
       params: { slug: post.slug },
       props: { slug: post.slug },
     }));
-  } catch {
+  } catch (err) {
+    console.error("[post/slug] getStaticPaths failed:", err instanceof Error ? err.message : err);
     return [];
   }
 };

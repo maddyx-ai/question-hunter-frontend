@@ -27,7 +27,8 @@ export async function GET(context: APIContext) {
         })),
       customData: `<language>en-us</language>`,
     });
-  } catch {
+  } catch (err) {
+    console.error("[rss] fetchPosts failed:", err instanceof Error ? err.message : err);
     return new Response("Failed to generate RSS feed", { status: 500 });
   }
 }
