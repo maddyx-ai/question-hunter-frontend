@@ -1,3 +1,5 @@
+import { supabase } from "./supabase";
+
 export interface Heading {
   depth: number;
   slug: string;
@@ -24,7 +26,6 @@ function slugify(text: string): string {
 
 /**
  * Injects id attributes into h2/h3 headings and extracts them for TOC.
- * Backend returns pre-rendered HTML without heading IDs, so we add them here.
  */
 export function processHtmlContent(raw: string): ParsedContent {
   slugCounts = {};
@@ -68,17 +69,26 @@ export interface ApiPost extends ApiPostSummary {
   content: string;
 }
 
-const BASE_URL = import.meta.env.PUBLIC_BACKEND_URL;
-
 export async function fetchPosts(): Promise<ApiPostSummary[]> {
-  const res = await fetch(BASE_URL);
-  if (!res.ok) throw new Error(`API ${res.status}: ${res.statusText}`);
-  return res.json();
+  const { data, error } = await supabase
+    .from("blog_posts")
+    .select("id, title, slug, tags, meta_description, published_at")
+    .order("published_at", { ascending: false });
+
+  if (error) throw new Error(`Supabase: ${error.message}`);
+  return (data ?? []) as ApiPostSummary[];
 }
 
 export async function fetchPost(slug: string): Promise<ApiPost | null> {
-  const res = await fetch(`${BASE_URL}/${slug}`);
-  if (res.status === 404) return null;
-  if (!res.ok) throw new Error(`API ${res.status}: ${res.statusText}`);
-  return res.json();
+  const { data, error } = await supabase
+    .from("blog_posts")
+    .select("id, title, slug, tags, meta_description, published_at, content")
+    .eq("slug", slug)
+    .single();
+
+  if (error) {
+    if (error.code === "PGRST116") return null;
+    throw new Error(`Supabase: ${error.message}`);
+  }
+  return data as ApiPost;
 }
