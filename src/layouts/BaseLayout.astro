@@ -5,6 +5,7 @@ import "@fontsource/geist-sans/500.css";
 import "@fontsource/jetbrains-mono/400.css";
 import "../styles/global.css";
 import Search from "../components/Search.astro";
+import Analytics from "@vercel/analytics/astro";
 
 interface Props {
   title: string;
@@ -29,6 +30,7 @@ const siteName = "Question Hunter";
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="generator" content={Astro.generator} />
     <ViewTransitions />
+    <Analytics />
 
     <!-- Primary meta -->
     <title>{title} | {siteName}</title>
