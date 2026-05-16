@@ -1,0 +1,20 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+---
+
+<BaseLayout title="404 | Page Not Found">
+  <div class="min-h-[70vh] flex flex-col items-center justify-center text-center">
+    <h1 class="text-[8rem] text-white/5 tracking-tighter leading-none font-display font-bold select-none">
+      404
+    </h1>
+    <h2 class="text-display-sm text-on-dark font-medium mt-4 mb-2">
+      Signal Lost
+    </h2>
+    <p class="text-ink-mute max-w-md mx-auto mb-8">
+      We couldn't find the page or article you're looking for. It may have been moved or deleted.
+    </p>
+    <a href="/" class="button-primary-green inline-flex items-center justify-center px-6 py-3 rounded-full bg-primary text-ink font-medium hover:bg-primary-soft transition-colors shadow-[0_0_15px_rgba(62,207,142,0.3)] hover:shadow-[0_0_25px_rgba(62,207,142,0.5)]">
+      Return to Feed
+    </a>
+  </div>
+</BaseLayout>

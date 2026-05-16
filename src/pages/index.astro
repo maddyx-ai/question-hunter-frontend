@@ -35,7 +35,7 @@ try {
       <p class="text-ink-mute text-body-lg">The Hunter is currently gathering data...</p>
     </section>
   ) : (
-    <section class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-lg">
+    <section id="spotlight-grid" class="relative group grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-lg">
       {posts.map((post) => {
         const date = new Intl.DateTimeFormat("en-US", {
           year: "numeric",
@@ -46,9 +46,9 @@ try {
         return (
           <a
             href={`/post/${post.slug}`}
-            class="group block rounded-lg border border-white/10 bg-canvas-night-soft/50 backdrop-blur-md transition-all duration-300 hover:-translate-y-1 hover:border-primary/50 hover:shadow-float"
+            class="relative overflow-hidden group/card block rounded-lg border border-white/10 bg-canvas-night-soft/50 backdrop-blur-md transition-all duration-300 hover:-translate-y-1 hover:border-primary/50 hover:shadow-float before:absolute before:inset-0 before:bg-[radial-gradient(400px_circle_at_var(--x)_var(--y),color-mix(in_srgb,var(--color-primary-soft)_10%,transparent),transparent)] before:opacity-0 hover:before:opacity-100 before:transition-opacity before:duration-500 before:pointer-events-none"
           >
-            <article class="p-6 flex flex-col gap-3">
+            <article class="relative z-10 p-6 flex flex-col gap-3">
               <time datetime={new Date(post.published_at).toISOString()} class="text-ink-mute-2 text-micro">
                 {date}
               </time>
@@ -76,3 +76,14 @@ try {
     </section>
   )}
 </BaseLayout>
+
+<script>
+  const grid = document.getElementById('spotlight-grid');
+  if (grid) {
+    grid.addEventListener('mousemove', (e) => {
+      const rect = grid.getBoundingClientRect();
+      grid.style.setProperty('--x', `${e.clientX - rect.left}px`);
+      grid.style.setProperty('--y', `${e.clientY - rect.top}px`);
+    });
+  }
+</script>

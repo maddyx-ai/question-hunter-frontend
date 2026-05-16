@@ -70,34 +70,83 @@ export interface ApiPost extends ApiPostSummary {
 }
 
 export async function fetchPosts(): Promise<ApiPostSummary[]> {
-  const { data, error } = await supabase
-    .from("blog_posts")
-    .select("id, title, slug, tags, meta_description, published_at")
-    .order("published_at", { ascending: false });
+  let supabasePosts: ApiPostSummary[] = [];
+  try {
+    const { data, error } = await supabase
+      .from("blog_posts")
+      .select("id, title, slug, tags, meta_description, published_at")
+      .order("published_at", { ascending: false });
 
-  if (error) {
-    console.error(`[fetchPosts] Supabase error: ${error.code} - ${error.message}`);
-    throw new Error(`Supabase: ${error.message}`);
+    if (error) {
+      console.error(`[fetchPosts] Supabase error: ${error.code} - ${error.message}`);
+    } else {
+      supabasePosts = (data ?? []) as ApiPostSummary[];
+    }
+  } catch (err: any) {
+    console.error(`[fetchPosts] Supabase fetch failed:`, err.message);
   }
-  console.log(`[fetchPosts] returned ${(data ?? []).length} row(s)`);
-  return (data ?? []) as ApiPostSummary[];
+
+  let localPosts: ApiPostSummary[] = [];
+  try {
+    // Dynamically import to avoid breaking when not in Astro context
+    const { getCollection } = await import("astro:content");
+    const blogEntries = await getCollection("blog");
+    localPosts = blogEntries.map(entry => ({
+      id: entry.id,
+      title: entry.data.title,
+      slug: entry.data.slug || entry.id,
+      tags: entry.data.tags || [],
+      meta_description: entry.data.meta_description || "",
+      published_at: entry.data.pubDate.toISOString(),
+    }));
+  } catch (err: any) {
+    console.warn(`[fetchPosts] Could not load local posts:`, err.message);
+  }
+
+  const combined = [...supabasePosts, ...localPosts].sort(
+    (a, b) => new Date(b.published_at).valueOf() - new Date(a.published_at).valueOf()
+  );
+
+  console.log(`[fetchPosts] returned ${combined.length} row(s) (${supabasePosts.length} remote, ${localPosts.length} local)`);
+  return combined;
 }
 
 export async function fetchPost(slug: string): Promise<ApiPost | null> {
-  const { data, error } = await supabase
-    .from("blog_posts")
-    .select("id, title, slug, tags, meta_description, published_at, content")
-    .eq("slug", slug)
-    .single();
+  try {
+    const { data, error } = await supabase
+      .from("blog_posts")
+      .select("id, title, slug, tags, meta_description, published_at, content")
+      .eq("slug", slug)
+      .single();
 
-  if (error) {
-    if (error.code === "PGRST116") {
-      console.log(`[fetchPost] no row found for slug="${slug}"`);
-      return null;
+    if (!error && data) {
+      console.log(`[fetchPost] found remote row for slug="${slug}"`);
+      return data as ApiPost;
     }
-    console.error(`[fetchPost] Supabase error for slug="${slug}": ${error.code} - ${error.message}`);
-    throw new Error(`Supabase: ${error.message}`);
+  } catch (err: any) {
+    console.error(`[fetchPost] Supabase error for slug="${slug}":`, err.message);
   }
-  console.log(`[fetchPost] found row for slug="${slug}"`);
-  return data as ApiPost;
+
+  try {
+    const { getCollection, render } = await import("astro:content");
+    const blogEntries = await getCollection("blog");
+    const entry = blogEntries.find(e => (e.data.slug || e.id) === slug);
+    if (entry) {
+      console.log(`[fetchPost] found local row for slug="${slug}"`);
+      return {
+        id: entry.id,
+        title: entry.data.title,
+        slug: entry.data.slug || entry.id,
+        tags: entry.data.tags || [],
+        meta_description: entry.data.meta_description || "",
+        published_at: entry.data.pubDate.toISOString(),
+        content: entry.body || "", // Note: Rendered content might need to be parsed in .astro
+      };
+    }
+  } catch (err: any) {
+    console.warn(`[fetchPost] Could not load local post for slug="${slug}":`, err.message);
+  }
+
+  console.log(`[fetchPost] no row found for slug="${slug}"`);
+  return null;
 }

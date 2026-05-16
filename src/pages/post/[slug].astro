@@ -44,22 +44,21 @@ const date = new Intl.DateTimeFormat("en-US", {
 <BaseLayout title={post.title} description={description}>
   <!-- Hero -->
   <header class="mb-16 max-w-3xl">
-    <h1 class="text-on-dark text-display-xl tracking-display-xl leading-none mb-6">
+    <h1 class="text-display-xl tracking-display-xl leading-none mb-6 bg-gradient-to-br from-white via-[#e5e5e5] to-[#a1a1aa] bg-clip-text text-transparent pb-1">
       {post.title}
     </h1>
-    <div class="flex items-center gap-4 text-ink-mute-2 text-caption">
-      <time datetime={new Date(post.published_at).toISOString()}>{date}</time>
+    <div class="flex flex-wrap items-center gap-3 text-caption">
+      <div class="bg-white/5 border border-white/10 rounded-full px-3 py-1 text-[#d4d4d4] flex items-center backdrop-blur-sm">
+        <time datetime={new Date(post.published_at).toISOString()}>{date}</time>
+      </div>
       {post.tags && post.tags.length > 0 && (
-        <>
-          <span aria-hidden="true">·</span>
-          <div class="flex flex-wrap gap-2">
-            {post.tags.map((tag: string) => (
-              <span class="bg-primary/10 text-primary rounded-full px-2 py-0.5 text-micro">
-                {tag}
-              </span>
-            ))}
-          </div>
-        </>
+        <div class="flex flex-wrap gap-2">
+          {post.tags.map((tag: string) => (
+            <span class="bg-primary/10 border border-primary/20 text-primary rounded-full px-3 py-1 text-micro font-medium backdrop-blur-sm">
+              {tag}
+            </span>
+          ))}
+        </div>
       )}
     </div>
   </header>

@@ -48,7 +48,7 @@
   }
 
   .prose :global(p) {
-    color: var(--color-ink-mute);
+    color: #d4d4d4; /* Optimal ~7:1 contrast for long-form reading */
     font-size: var(--text-body-md);
     line-height: var(--text-body-md--line-height);
     margin-bottom: 1.25rem;
@@ -66,7 +66,7 @@
 
   .prose :global(ul),
   .prose :global(ol) {
-    color: var(--color-ink-mute);
+    color: #d4d4d4;
     font-size: var(--text-body-md);
     line-height: var(--text-body-md--line-height);
     margin-bottom: 1.25rem;
@@ -118,6 +118,13 @@
     -webkit-overflow-scrolling: touch;
     margin: 1.5rem 0;
     position: relative;
+    transition: transform 0.25s cubic-bezier(0.2, 0.8, 0.2, 1), box-shadow 0.25s cubic-bezier(0.2, 0.8, 0.2, 1), border-color 0.25s ease;
+  }
+
+  .prose :global(pre:hover) {
+    transform: translateY(-2px);
+    box-shadow: 0 12px 24px -10px rgba(0, 0, 0, 0.5), 0 0 15px rgba(62, 207, 142, 0.1);
+    border-color: rgba(62, 207, 142, 0.3);
   }
 
   .prose :global(pre code) {
@@ -167,7 +174,7 @@
   }
 
   .prose :global(td) {
-    color: var(--color-ink-mute);
+    color: #d4d4d4;
     padding: 0.5rem 0.75rem;
     border-bottom: 1px solid rgba(255, 255, 255, 0.04);
   }
@@ -179,7 +186,7 @@
   }
 
   .prose :global(em) {
-    color: var(--color-ink-mute);
+    color: #d4d4d4;
     font-style: italic;
   }
 
@@ -191,7 +198,7 @@
   }
 
   .prose :global(dd) {
-    color: var(--color-ink-mute);
+    color: #d4d4d4;
     margin-left: 1rem;
     margin-bottom: 0.5rem;
   }
